@@ -1,11 +1,10 @@
 services:
 {% for image, deps in images.items() %}
   {{image}}:
-    #pull_policy: build
     image: ${REGISTRY}/inginious/env-{{image}}
     build:
-      dockerfile: ../../grading/{{image}}/Dockerfile
-      context: ../../grading/{{image}}
+      dockerfile: ./Dockerfile
+      context: {{base_path}}/{{image}}
       args:
         REGISTRY: ${REGISTRY}
       cache_from:
