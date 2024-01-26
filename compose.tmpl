@@ -1,7 +1,7 @@
 services:
 {% for image, deps in images.items() %}
   {{image}}:
-    image: ${REGISTRY}/inginious/${TYPE}-{{image}}
+    image: ${REGISTRY}/inginious/${TYPE}-{{image}}:latest
     build:
       dockerfile: ./Dockerfile
       context: {{base_path}}/{{image}}
