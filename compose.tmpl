@@ -1,17 +1,17 @@
 services:
 {% for image, deps in images.items() %}
   {{image}}:
-    image: ${REGISTRY}/inginious/${TYPE}-{{image}}:latest
+    image: ${REGISTRY}/inginious/${TYPE}-{{image}}:{{version}}
     build:
       dockerfile: ./Dockerfile
       context: {{base_path}}/{{image}}
       args:
         REGISTRY: ${REGISTRY}
       cache_from:
-        - ${REGISTRY}/inginious/${TYPE}-{{image}}:cache
+        - ${REGISTRY}/inginious/${TYPE}-{{image}}-{{version}}:cache
         - type=gha
       cache_to:
-        - ${REGISTRY}/inginious/${TYPE}-{{image}}:cache
+        - ${REGISTRY}/inginious/${TYPE}-{{image}}-{{version}}:cache
         - type=gha
 {% if deps|length != 0 %}
     depends_on:
